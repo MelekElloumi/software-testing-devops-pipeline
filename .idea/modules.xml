@@ -6,6 +6,8 @@
       <module fileurl="file://$PROJECT_DIR$/../../Deep Learning/DL_Sample_Projects/.idea/DL_Sample_Projects.iml" filepath="$PROJECT_DIR$/../../Deep Learning/DL_Sample_Projects/.idea/DL_Sample_Projects.iml" />
       <module fileurl="file://$PROJECT_DIR$/../../Data Mining/DM TP3/.idea/DM TP3.iml" filepath="$PROJECT_DIR$/../../Data Mining/DM TP3/.idea/DM TP3.iml" />
       <module fileurl="file://$PROJECT_DIR$/../../Data Mining/DM TP4/.idea/DM TP4.iml" filepath="$PROJECT_DIR$/../../Data Mining/DM TP4/.idea/DM TP4.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../UnitTest/.idea/UnitTest.iml" filepath="$PROJECT_DIR$/../UnitTest/.idea/UnitTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../Traitement_image/image_processing_tool/.idea/image_processing_tool.iml" filepath="$PROJECT_DIR$/../../Traitement_image/image_processing_tool/.idea/image_processing_tool.iml" />
     </modules>
   </component>
 </project>

@@ -9,5 +9,7 @@
     <orderEntry type="module" module-name="DM TP3" />
     <orderEntry type="module" module-name="DM TP4" />
     <orderEntry type="module" module-name="DL_Sample_Projects" />
+    <orderEntry type="module" module-name="UnitTest" />
+    <orderEntry type="module" module-name="image_processing_tool" />
   </component>
 </module>
