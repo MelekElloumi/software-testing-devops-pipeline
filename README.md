@@ -1,13 +1,13 @@
-# App 4 Software Testing  
+# App 4 Software Testing & DevOps Pipeline
 
-- This is a small python application that I made to try on 4 levels of software testing.
-- The user login then manages products (CRUD). There is also an "average price" and a "buying product" functionalitiy.
+- This is a small python application that I made to try on 4 types of software testing and a DevOps pipeline.
+- The user login then manages products (CRUD). He can buy a product or get the price average.
 - I used sqlite3 for the database. It was initialised with databaseinit.py.
 - In each folder you will find one level of testing with its Readme file:
-    1. Unit Tests
-    2. //
-    3. //
-    4. //
+    1. Unit testing
+    2. Integration testing
+    3. E2E testing
+    4. UAT
 
 ### Execution:
 
