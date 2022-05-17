@@ -1,4 +1,4 @@
-# Unit Tests 
+# Unit Testing 
 
 - I wrote 9 test cases for 4 methods of App4Test.
 - Each test contains 3 steps: 
