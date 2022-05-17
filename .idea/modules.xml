@@ -6,6 +6,7 @@
       <module fileurl="file://$PROJECT_DIR$/../../Data_Science_Lab/Data_Mining/.idea/Data_Mining.iml" filepath="$PROJECT_DIR$/../../Data_Science_Lab/Data_Mining/.idea/Data_Mining.iml" />
       <module fileurl="file://$PROJECT_DIR$/../../Architecture logicielle/Tp3_Architecture/.idea/Tp3_Architecture.iml" filepath="$PROJECT_DIR$/../../Architecture logicielle/Tp3_Architecture/.idea/Tp3_Architecture.iml" />
       <module fileurl="file://$PROJECT_DIR$/../UnitTest/.idea/UnitTest.iml" filepath="$PROJECT_DIR$/../UnitTest/.idea/UnitTest.iml" />
+      <module fileurl="file://$USER_HOME$/Downloads/myflaskapp-master/.idea/myflaskapp-master.iml" filepath="$USER_HOME$/Downloads/myflaskapp-master/.idea/myflaskapp-master.iml" />
     </modules>
   </component>
 </project>
