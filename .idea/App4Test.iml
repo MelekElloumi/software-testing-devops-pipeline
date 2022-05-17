@@ -4,12 +4,10 @@
     <content url="file://$MODULE_DIR$">
       <excludeFolder url="file://$MODULE_DIR$/venv" />
     </content>
-    <orderEntry type="jdk" jdkName="Python 3.9 (tf)" jdkType="Python SDK" />
+    <orderEntry type="jdk" jdkName="Python 3.9 (tf) (2)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module" module-name="DM TP3" />
-    <orderEntry type="module" module-name="DM TP4" />
-    <orderEntry type="module" module-name="DL_Sample_Projects" />
     <orderEntry type="module" module-name="UnitTest" />
-    <orderEntry type="module" module-name="image_processing_tool" />
+    <orderEntry type="module" module-name="Data_Mining" />
+    <orderEntry type="module" module-name="Tp3_Architecture" />
   </component>
 </module>
