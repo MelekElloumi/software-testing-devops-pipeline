@@ -8,6 +8,9 @@
     {% if session.logged_in == NULL %}
       <a href="/register" class="btn btn-primary btn-lg">Register</a>
       <a href="/login" class="btn btn-success btn-lg">Login</a>
+    {% else %}
+      <a href="/productapp" class="btn btn-primary btn-lg">ProductApp</a>
+      <a href="/logout" class="btn btn-primary btn-lg">Logout</a>
     {% endif %}
   </div>
 {% endblock %}
