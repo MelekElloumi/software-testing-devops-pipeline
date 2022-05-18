@@ -6,7 +6,6 @@ from functools import wraps
 from loginModule import verifyUser,addUser
 import productModule
 from databaseInit import create_db
-from Product import Product
 
 
 def create_app(name):
@@ -115,9 +114,8 @@ def create_app(name):
             name = form.name.data
             price = form.price.data
             quantity = form.quantity.data
-            product=Product(0,name,price,quantity)
 
-            productModule.add_product(product)
+            productModule.add_product(name,price,quantity)
 
             flash('Product Created', 'success')
 
@@ -144,9 +142,7 @@ def create_app(name):
             price = request.form['price']
             quantity = request.form['quantity']
 
-            product_up = Product(id, name, price, quantity)
-
-            productModule.update_product(product_up)
+            productModule.update_product(id, name, price, quantity)
 
             flash('Product updated successfully', 'success')
 

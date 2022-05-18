@@ -3,9 +3,11 @@
 {% block body %}
   <h1>ProductApp <small> Welcome {{session.username}}</small></h1>
   <a class="btn btn-success" href="/add_product">Add Product</a>
-  <a class="btn btn-success" href="/average_product">Average Product Price</a><br><br>
-  {% if average != NULL %}
-<p> Average: {{average}}</p>
+  {% if products != NULL %}
+    <a class="btn btn-success" href="/average_product">Average Product Price</a><br><br>
+    {% if average != NULL %}
+      <p> Average: {{average}}</p>
+    {% endif %}
   {% endif %}
   <hr>
   <table class="table table-striped">

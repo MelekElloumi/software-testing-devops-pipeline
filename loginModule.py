@@ -22,14 +22,15 @@ def verifyUser(username,password):
     return True,""
 
 #old
-def loginMenu():
-    loggedin=False
-    username=""
-    password=""
-    while not loggedin:
-        print("-------Login-------")
-        username=input("Enter your username:\n")
-        password=input("Enter your password:\n")
-        loggedin=verifyUser(username,password)
-    print(username+" is logged in\n-------------------")
-    return username,password
+
+# def loginMenu():
+#     loggedin=False
+#     username=""
+#     password=""
+#     while not loggedin:
+#         print("-------Login-------")
+#         username=input("Enter your username:\n")
+#         password=input("Enter your password:\n")
+#         loggedin=verifyUser(username,password)
+#     print(username+" is logged in\n-------------------")
+#     return username,password

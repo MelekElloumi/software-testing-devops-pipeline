@@ -1,19 +1,16 @@
 import sqlite3
-from Product import Product
 
 def fetch_by_id(id):
     connection = sqlite3.connect('database.db', check_same_thread=False)
     cur = connection.cursor()
-    cur.execute("SELECT * FROM PRODUCT WHERE ID=?;", (id,))
-    product = cur.fetchone()
+    product= cur.execute("SELECT * FROM PRODUCT WHERE ID=?;", (id,)).fetchone()
     connection.close()
     return product
 
 def fetch_all():
     connection = sqlite3.connect('database.db', check_same_thread=False)
     cur = connection.cursor()
-    cur.execute("SELECT * FROM PRODUCT;")
-    products = cur.fetchall()
+    products = cur.execute("SELECT * FROM PRODUCT;").fetchall()
     connection.close()
     return products
 
@@ -32,17 +29,17 @@ def price_average():
         prices.append(product[2])
     return average(prices)
 
-def add_product(product):
+def add_product(name,price,quantity):
     connection = sqlite3.connect('database.db')
     connection.execute(
-        "INSERT INTO Product (NAME,PRICE,QUANTITY) VALUES (?,?,?);", (product.name,product.price,product.quantity,))
+        "INSERT INTO Product (NAME,PRICE,QUANTITY) VALUES (?,?,?);", (name,price,quantity,))
     connection.commit()
     connection.close()
 
-def update_product(product):
+def update_product(id,name,price,quantity):
     connection = sqlite3.connect('database.db')
     connection.execute(
-        "UPDATE PRODUCT SET NAME=?, PRICE=?, QUANTITY=? WHERE ID=?;", (product.name,product.price,product.quantity,product.id,))
+        "UPDATE PRODUCT SET NAME=?, PRICE=?, QUANTITY=? WHERE ID=?;", (name,price,quantity,id,))
     connection.commit()
     connection.close()
 
@@ -67,111 +64,112 @@ def buy_product(id):
         return True
 
 #Old
-def productMenu():
-    choice='0'
-    while choice!='8':
-        print("\n-------Product Menu-------")
-        print("1-Fetch product by name")
-        print("2-Fetch all products")
-        print("3-Add product")
-        print("4-Update product")
-        print("5-Delete product")
-        print("6-Average price of all products")
-        print("7-Buy product")
-        print("8-Exit")
-        print("--------------------------")
-        choice=input("Enter your choice number: ")
-# ---------------------------------------------------------------------------------------
-        if (choice=='1'):
-            name=input("Enter the product's name: ")
-            found,product=fetch_by_id(name)
-            if not found:
-                print("Product not found")
-            else:
-                print("Product found:")
-                product.show()
-# ---------------------------------------------------------------------------------------
-        if (choice=='2'):
-            products=fetch_all()
-            print(str(len(products))+" products found: ")
-            for i in range(0,len(products)):
-                print(str(i+1)+"- ", end='')
-                products[i].show()
-# ---------------------------------------------------------------------------------------
-        if (choice=='3'):
-            found=True
-            product=Product(0,'',0,0)
-            while found:
-                product.name=input("Enter the product's name: ")
-                found, p = fetch_by_id(product.name)
-                if found:
-                    print("Product name exists")
-            negative=True
-            while negative:
-                product.price = float(input("Enter the product's price: "))
-                negative = product.price <= 0
-                if negative:
-                    print("Product's price must be strictly positive")
-            negative=True
-            while negative:
-                product.quantity = int(input("Enter the product's quantity: "))
-                negative = product.price < 0
-                if negative:
-                    print("Product's quantity must be positive")
-            add_product(product)
-            print(product.name+" added")
-#---------------------------------------------------------------------------------------
-        if (choice=='4'):
-            name = input("Enter the existing product's name: ")
-            found, product = fetch_by_id(name)
-            if not found :
-                print("Product not found")
-                continue
-            found = True
-            while found:
-                product.name = input("Enter the product's new name: ")
-                found, p = fetch_by_id(product.name)
-                found=found and product.name!=name
-                if found:
-                    print("Product name exists")
-            negative = True
-            while negative:
-                product.price = float(input("Enter the product's new price: "))
-                negative = product.price <= 0
-                if negative:
-                    print("Product's price must be strictly positive")
-            negative = True
-            while negative:
-                product.quantity = int(input("Enter the product's new quantity: "))
-                negative = product.price < 0
-                if negative:
-                    print("Product's quantity must be positive")
-            update_product(product)
-            print(name+" updated")
-# ---------------------------------------------------------------------------------------
-        if (choice=='5'):
-            name = input("Enter the product's name to delete: ")
-            found, product = fetch_by_id(name)
-            if not found:
-                print("Product not found")
-                continue
-            delete_product(product.id)
-            print(name+" deleted")
-# ---------------------------------------------------------------------------------------
-        if (choice=='6'):
-            price=price_average()
-            print("The average price of all products is: "+str(price))
-# ---------------------------------------------------------------------------------------
-        if (choice=='7'):
-            name = input("Enter the product's name to buy: ")
-            found, product = fetch_by_id(name)
-            if not found:
-                print("Product not found")
-                continue
-            bought=buy_product(product.id)
-            if bought:
-                print(name + " bought")
-            else:
-                print(name +"'s stock is depleted")
+
+# def productMenu():
+#     choice='0'
+#     while choice!='8':
+#         print("\n-------Product Menu-------")
+#         print("1-Fetch product by name")
+#         print("2-Fetch all products")
+#         print("3-Add product")
+#         print("4-Update product")
+#         print("5-Delete product")
+#         print("6-Average price of all products")
+#         print("7-Buy product")
+#         print("8-Exit")
+#         print("--------------------------")
+#         choice=input("Enter your choice number: ")
+# # ---------------------------------------------------------------------------------------
+#         if (choice=='1'):
+#             name=input("Enter the product's name: ")
+#             found,product=fetch_by_id(name)
+#             if not found:
+#                 print("Product not found")
+#             else:
+#                 print("Product found:")
+#                 product.show()
+# # ---------------------------------------------------------------------------------------
+#         if (choice=='2'):
+#             products=fetch_all()
+#             print(str(len(products))+" products found: ")
+#             for i in range(0,len(products)):
+#                 print(str(i+1)+"- ", end='')
+#                 products[i].show()
+# # ---------------------------------------------------------------------------------------
+#         if (choice=='3'):
+#             found=True
+#             product=Product(0,'',0,0)
+#             while found:
+#                 product.name=input("Enter the product's name: ")
+#                 found, p = fetch_by_id(product.name)
+#                 if found:
+#                     print("Product name exists")
+#             negative=True
+#             while negative:
+#                 product.price = float(input("Enter the product's price: "))
+#                 negative = product.price <= 0
+#                 if negative:
+#                     print("Product's price must be strictly positive")
+#             negative=True
+#             while negative:
+#                 product.quantity = int(input("Enter the product's quantity: "))
+#                 negative = product.price < 0
+#                 if negative:
+#                     print("Product's quantity must be positive")
+#             add_product(product)
+#             print(product.name+" added")
+# #---------------------------------------------------------------------------------------
+#         if (choice=='4'):
+#             name = input("Enter the existing product's name: ")
+#             found, product = fetch_by_id(name)
+#             if not found :
+#                 print("Product not found")
+#                 continue
+#             found = True
+#             while found:
+#                 product.name = input("Enter the product's new name: ")
+#                 found, p = fetch_by_id(product.name)
+#                 found=found and product.name!=name
+#                 if found:
+#                     print("Product name exists")
+#             negative = True
+#             while negative:
+#                 product.price = float(input("Enter the product's new price: "))
+#                 negative = product.price <= 0
+#                 if negative:
+#                     print("Product's price must be strictly positive")
+#             negative = True
+#             while negative:
+#                 product.quantity = int(input("Enter the product's new quantity: "))
+#                 negative = product.price < 0
+#                 if negative:
+#                     print("Product's quantity must be positive")
+#             update_product(product)
+#             print(name+" updated")
+# # ---------------------------------------------------------------------------------------
+#         if (choice=='5'):
+#             name = input("Enter the product's name to delete: ")
+#             found, product = fetch_by_id(name)
+#             if not found:
+#                 print("Product not found")
+#                 continue
+#             delete_product(product.id)
+#             print(name+" deleted")
+# # ---------------------------------------------------------------------------------------
+#         if (choice=='6'):
+#             price=price_average()
+#             print("The average price of all products is: "+str(price))
+# # ---------------------------------------------------------------------------------------
+#         if (choice=='7'):
+#             name = input("Enter the product's name to buy: ")
+#             found, product = fetch_by_id(name)
+#             if not found:
+#                 print("Product not found")
+#                 continue
+#             bought=buy_product(product.id)
+#             if bought:
+#                 print(name + " bought")
+#             else:
+#                 print(name +"'s stock is depleted")
 
 
