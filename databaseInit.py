@@ -19,4 +19,5 @@ def create_db(database_filename):
     connection.close()
 
 if __name__ == '__main__':
-    create_db('database.db')
+    database_filename = os.environ.get('DATABASE_FILENAME', 'database.db')
+    create_db(database_filename)

@@ -14,6 +14,7 @@ def create_test_database(tmp_path_factory):
     tmp_dir = tmp_path_factory.mktemp("tmp")
     database_filename = tmp_dir / "test_database.db"
     create_db(database_filename)
+    os.environ['DATABASE_FILENAME'] = str(database_filename)
 
 @pytest.fixture(scope='module')
 def test_client():

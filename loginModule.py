@@ -1,18 +1,19 @@
 import sqlite3
+import os
 
 def addUser(username,password):
-    connection = sqlite3.connect('database.db', check_same_thread=False)
+    database_filename = os.environ.get('DATABASE_FILENAME')
+    connection = sqlite3.connect(database_filename, check_same_thread=False)
     cur = connection.cursor()
     cur.execute("INSERT INTO User(USERNAME,PASSWORD) VALUES(?, ?)", (username, password))
     connection.commit()
-    connection.close()
 
 def verifyUser(username,password):
-    connection = sqlite3.connect('database.db', check_same_thread=False)
+    database_filename = os.environ.get('DATABASE_FILENAME')
+    connection = sqlite3.connect(database_filename, check_same_thread=False)
     cur = connection.cursor()
     data=cur.execute("SELECT PASSWORD FROM USER WHERE USERNAME=?;", (username,)).fetchone()
     connection.commit()
-    connection.close()
     if(data==None):
         error="User not registered in database"
         return False,error

@@ -3,15 +3,17 @@ from unittest import TestCase
 from unittest.mock import patch
 from productModule import average, price_average, fetch_by_id,fetch_all,add_product,update_product,delete_product,buy_product
 from loginModule import verifyUser, addUser
+import os
 
 #to run the test:
-#coverage run -m unittest UnitTest\test_app4test.py
+#coverage run -m unittest UnitTest\test_unit_app4test.py
+os.environ['DATABASE_FILENAME'] = 'database.db'
 
 class TestAddUser(TestCase):
     @patch("loginModule.sqlite3", spec=sqlite3)
     def test_addUser(self, mocked_object):
         # Given
-        mock_execute=(mocked_object.connect.return_value.cursor.return_value.execute)
+        mock_execute= (mocked_object.connect.return_value.cursor.return_value.execute)
         # When
         addUser('test', 'test')
         # Then

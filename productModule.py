@@ -1,14 +1,17 @@
 import sqlite3
+import os
 
 def fetch_by_id(id):
-    connection = sqlite3.connect('database.db', check_same_thread=False)
+    database_filename = os.environ.get('DATABASE_FILENAME')
+    connection = sqlite3.connect(database_filename, check_same_thread=False)
     cur = connection.cursor()
     product= cur.execute("SELECT * FROM PRODUCT WHERE ID=?;", (id,)).fetchone()
     connection.close()
     return product
 
 def fetch_all():
-    connection = sqlite3.connect('database.db', check_same_thread=False)
+    database_filename = os.environ.get('DATABASE_FILENAME')
+    connection = sqlite3.connect(database_filename, check_same_thread=False)
     cur = connection.cursor()
     products = cur.execute("SELECT * FROM PRODUCT;").fetchall()
     connection.close()
@@ -30,37 +33,36 @@ def price_average():
     return average(prices)
 
 def add_product(name,price,quantity):
-    connection = sqlite3.connect('database.db')
+    database_filename = os.environ.get('DATABASE_FILENAME')
+    connection = sqlite3.connect(database_filename, check_same_thread=False)
     connection.execute(
         "INSERT INTO Product (NAME,PRICE,QUANTITY) VALUES (?,?,?);", (name,price,quantity,))
     connection.commit()
-    connection.close()
 
 def update_product(id,name,price,quantity):
-    connection = sqlite3.connect('database.db')
+    database_filename = os.environ.get('DATABASE_FILENAME')
+    connection = sqlite3.connect(database_filename, check_same_thread=False)
     connection.execute(
         "UPDATE PRODUCT SET NAME=?, PRICE=?, QUANTITY=? WHERE ID=?;", (name,price,quantity,id,))
     connection.commit()
-    connection.close()
 
 def delete_product(id):
-    connection = sqlite3.connect('database.db')
+    database_filename = os.environ.get('DATABASE_FILENAME')
+    connection = sqlite3.connect(database_filename, check_same_thread=False)
     connection.execute(
         "DELETE FROM PRODUCT WHERE ID=?;",(id,))
     connection.commit()
-    connection.close()
 
 def buy_product(id):
-    connection = sqlite3.connect('database.db')
+    database_filename = os.environ.get('DATABASE_FILENAME')
+    connection = sqlite3.connect(database_filename, check_same_thread=False)
     cursor=connection.cursor()
     cursor.execute(
         "UPDATE PRODUCT SET QUANTITY=QUANTITY-1 WHERE ID=? AND QUANTITY>0;",(id,))
     connection.commit()
     if cursor.rowcount < 1:
-        connection.close()
         return False
     else:
-        connection.close()
         return True
 
 #Old
