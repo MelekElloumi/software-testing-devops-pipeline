@@ -77,7 +77,15 @@ def create_app(name):
 
         return wrap
 
-    # Dashboard
+    # Logout
+    @app.route('/logout')
+    @is_logged_in
+    def logout():
+        session.clear()
+        flash('Logged out successfully', 'success')
+        return redirect(url_for('index'))
+
+    # ProductApp
     @app.route('/productapp')
     @is_logged_in
     def productapp():
@@ -93,7 +101,7 @@ def create_app(name):
 
 
 if __name__ == '__main__':
-    create_db('database.db')
+    #create_db('database.db')
     app = create_app(__name__)
     app.secret_key = 'secret123'
     app.run()

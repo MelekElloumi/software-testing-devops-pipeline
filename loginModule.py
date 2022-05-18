@@ -21,6 +21,7 @@ def verifyUser(username,password):
         return False,error
     return True,""
 
+#old
 def loginMenu():
     loggedin=False
     username=""
