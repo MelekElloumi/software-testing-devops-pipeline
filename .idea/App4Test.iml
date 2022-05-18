@@ -2,14 +2,13 @@
 <module type="PYTHON_MODULE" version="4">
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/Integration Test" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/UnitTest" isTestSource="true" />
       <excludeFolder url="file://$MODULE_DIR$/venv" />
     </content>
     <orderEntry type="jdk" jdkName="Python 3.9 (tf) (2)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module" module-name="UnitTest" />
     <orderEntry type="module" module-name="Data_Mining" />
-    <orderEntry type="module" module-name="Tp3_Architecture" />
-    <orderEntry type="module" module-name="myflaskapp-master" />
   </component>
   <component name="TemplatesService">
     <option name="TEMPLATE_FOLDERS">

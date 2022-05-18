@@ -8,8 +8,11 @@ import productModule
 from databaseInit import create_db
 
 
-def create_app(name):
-    app = Flask(name)
+def create_app(name, test=False):
+    if test:
+        app = Flask(name,template_folder='../templates')
+    else:
+        app = Flask(name, template_folder='templates')
     db_connection = sqlite3.connect('database.db', check_same_thread=False)
     app.config.from_mapping(
         DATABASE_CON=db_connection
@@ -179,15 +182,7 @@ def create_app(name):
         else:
             return render_template('productapp.html', error="Product Stock depleted")
 
-
-
     return app
-
-
-# print("-------App4Test-------")
-# username,password=loginMenu()
-# productMenu()
-# print("App4Test done, goodbye ^_^")
 
 
 if __name__ == '__main__':
