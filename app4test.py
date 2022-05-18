@@ -1,13 +1,15 @@
 from flask import Flask, render_template, flash, redirect, url_for, session, request, logging, jsonify
 import sqlite3
 from flask_mysqldb import MySQL
-from wtforms import Form, StringField, TextAreaField, PasswordField, validators
+from wtforms import Form, StringField, FloatField, IntegerField, PasswordField, validators
 from passlib.hash import sha256_crypt
 from functools import wraps
 
+import productModule
 from loginModule import verifyUser,addUser
-from productModule import fetch_all
+from productModule import fetch_all,add_product
 from databaseInit import create_db
+from Product import Product
 
 
 def create_app(name):
@@ -95,6 +97,31 @@ def create_app(name):
         else:
             msg = 'No products Found'
             return render_template('productapp.html', msg=msg)
+
+    # Product Form Class
+    class ProductForm(Form):
+        name = StringField('Name', [validators.Length(min=1, max=200)])
+        price = FloatField('Price')
+        quantity = IntegerField('Quantity')
+
+    # Add Product
+    @app.route('/add_product', methods=['GET', 'POST'])
+    @is_logged_in
+    def add_product():
+        form = ProductForm(request.form)
+        if request.method == 'POST' and form.validate():
+            name = form.name.data
+            price = form.price.data
+            quantity = form.quantity.data
+            product=Product(0,name,price,quantity)
+
+            productModule.add_product(product)
+
+            flash('Product Created', 'success')
+
+            return redirect(url_for('productapp'))
+
+        return render_template('add_product.html', form=form)
 
     # Delete Article
     @app.route('/delete_product/<string:id>', methods=['POST'])
