@@ -29,7 +29,7 @@ def price_average():
     products = fetch_all()
     prices=[]
     for product in products:
-        prices.append(product.price)
+        prices.append(product[2])
     return average(prices)
 
 def add_product(product):
@@ -84,7 +84,7 @@ def productMenu():
 # ---------------------------------------------------------------------------------------
         if (choice=='1'):
             name=input("Enter the product's name: ")
-            found,product=fetch_by_name(name)
+            found,product=fetch_by_id(name)
             if not found:
                 print("Product not found")
             else:
@@ -103,7 +103,7 @@ def productMenu():
             product=Product(0,'',0,0)
             while found:
                 product.name=input("Enter the product's name: ")
-                found, p = fetch_by_name(product.name)
+                found, p = fetch_by_id(product.name)
                 if found:
                     print("Product name exists")
             negative=True
@@ -123,14 +123,14 @@ def productMenu():
 #---------------------------------------------------------------------------------------
         if (choice=='4'):
             name = input("Enter the existing product's name: ")
-            found, product = fetch_by_name(name)
+            found, product = fetch_by_id(name)
             if not found :
                 print("Product not found")
                 continue
             found = True
             while found:
                 product.name = input("Enter the product's new name: ")
-                found, p = fetch_by_name(product.name)
+                found, p = fetch_by_id(product.name)
                 found=found and product.name!=name
                 if found:
                     print("Product name exists")
@@ -151,7 +151,7 @@ def productMenu():
 # ---------------------------------------------------------------------------------------
         if (choice=='5'):
             name = input("Enter the product's name to delete: ")
-            found, product = fetch_by_name(name)
+            found, product = fetch_by_id(name)
             if not found:
                 print("Product not found")
                 continue
@@ -164,7 +164,7 @@ def productMenu():
 # ---------------------------------------------------------------------------------------
         if (choice=='7'):
             name = input("Enter the product's name to buy: ")
-            found, product = fetch_by_name(name)
+            found, product = fetch_by_id(name)
             if not found:
                 print("Product not found")
                 continue

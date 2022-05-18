@@ -1,11 +1,8 @@
-from flask import Flask, render_template, flash, redirect, url_for, session, request, logging, jsonify
+from flask import Flask, render_template, flash, redirect, url_for, session, request
 import sqlite3
-from flask_mysqldb import MySQL
 from wtforms import Form, StringField, FloatField, IntegerField, PasswordField, validators
-from passlib.hash import sha256_crypt
 from functools import wraps
 
-import productModule
 from loginModule import verifyUser,addUser
 import productModule
 from databaseInit import create_db
@@ -89,14 +86,19 @@ def create_app(name):
 
     # ProductApp
     @app.route('/productapp')
+    @app.route('/productapp/<float:average>')
     @is_logged_in
-    def productapp():
+    def productapp(average=None):
         products = productModule.fetch_all()
         if len(products) > 0:
-            return render_template('productapp.html', products=products)
+            if average==None:
+                return render_template('productapp.html', products=products)
+            else:
+                return render_template('productapp.html', products=products,average=average)
         else:
             msg = 'No products Found'
             return render_template('productapp.html', msg=msg)
+
 
     # Product Form Class
     class ProductForm(Form):
@@ -162,6 +164,26 @@ def create_app(name):
         flash('Product Deleted', 'success')
 
         return redirect(url_for('productapp'))
+
+    # Average Product
+    @app.route('/average_product')
+    @is_logged_in
+    def average_product():
+        average=productModule.price_average()
+        return redirect(url_for('productapp',average=average))
+
+    # Buy Product
+    @app.route('/buy_product/<string:id>', methods=['POST'])
+    @is_logged_in
+    def buy_product(id):
+        bought = productModule.buy_product(id)
+        if bought:
+            flash('Product bought successfully', 'success')
+            return redirect(url_for('productapp'))
+        else:
+            return render_template('productapp.html', error="Product Stock depleted")
+
+
 
     return app
 
