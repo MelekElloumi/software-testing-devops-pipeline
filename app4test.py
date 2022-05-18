@@ -7,7 +7,7 @@ from functools import wraps
 
 import productModule
 from loginModule import verifyUser,addUser
-from productModule import fetch_all,add_product
+import productModule
 from databaseInit import create_db
 from Product import Product
 
@@ -91,7 +91,7 @@ def create_app(name):
     @app.route('/productapp')
     @is_logged_in
     def productapp():
-        products = fetch_all()
+        products = productModule.fetch_all()
         if len(products) > 0:
             return render_template('productapp.html', products=products)
         else:
@@ -123,26 +123,45 @@ def create_app(name):
 
         return render_template('add_product.html', form=form)
 
+    # Edit Article
+    @app.route('/edit_product/<string:id>', methods=['GET', 'POST'])
+    @is_logged_in
+    def edit_product(id):
+        # Create cursor
+        product = productModule.fetch_by_id(id)
+        # Get form
+        form = ProductForm(request.form)
+
+        # Populate article form fields
+        form.name.data = product[1]
+        form.price.data = product[2]
+        form.quantity.data = product[3]
+
+        if request.method == 'POST' and form.validate():
+            name = request.form['name']
+            price = request.form['price']
+            quantity = request.form['quantity']
+
+            product_up = Product(id, name, price, quantity)
+
+            productModule.update_product(product_up)
+
+            flash('Product updated successfully', 'success')
+
+            return redirect(url_for('productapp'))
+
+        return render_template('edit_product.html', form=form)
+
     # Delete Article
     @app.route('/delete_product/<string:id>', methods=['POST'])
     @is_logged_in
     def delete_product(id):
-        return redirect(url_for('dashboard'))
-        # # Create cursor
-        # cur = mysql.connection.cursor()
-        #
-        # # Execute
-        # cur.execute("DELETE FROM articles WHERE id = %s", [id])
-        #
-        # # Commit to DB
-        # mysql.connection.commit()
-        #
-        # # Close connection
-        # cur.close()
-        #
-        # flash('Article Deleted', 'success')
-        #
-        # return redirect(url_for('dashboard'))
+
+        productModule.delete_product(id)
+
+        flash('Product Deleted', 'success')
+
+        return redirect(url_for('productapp'))
 
     return app
 

@@ -1,26 +1,19 @@
 import sqlite3
 from Product import Product
 
-def fetch_by_name(name):
-    connection = sqlite3.connect('database.db')
-    data = connection.execute("SELECT * FROM PRODUCT WHERE NAME=?;", (name,)).fetchone()
-    if (data == None):
-        connection.close()
-        return False,None
-    product=Product(data[0],data[1],data[2],data[3])
+def fetch_by_id(id):
+    connection = sqlite3.connect('database.db', check_same_thread=False)
+    cur = connection.cursor()
+    cur.execute("SELECT * FROM PRODUCT WHERE ID=?;", (id,))
+    product = cur.fetchone()
     connection.close()
-    return True,product
+    return product
 
 def fetch_all():
     connection = sqlite3.connect('database.db', check_same_thread=False)
     cur = connection.cursor()
     cur.execute("SELECT * FROM PRODUCT;")
     products = cur.fetchall()
-    print(products)
-    #products=[]
-    #for row in data:
-        #product=Product(row[0],row[1],row[2],row[3])
-        #products.append(product)
     connection.close()
     return products
 

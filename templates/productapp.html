@@ -19,9 +19,9 @@
         <td>{{product[1]}}</td>
         <td>{{product[2]}}</td>
         <td>{{product[3]}}</td>
-        <td><a href="edit_product/{{product.id}}" class="btn btn-default pull-right">Edit</a></td>
+        <td><a href="edit_product/{{product[0]}}" class="btn btn-default pull-right">Edit</a></td>
         <td>
-          <form action="{{url_for('delete_product', id=product.id)}}" method="post">
+          <form action="{{url_for('delete_product', id=product[0])}}" method="post">
             <input type="hidden" name="_method" value="DELETE">
             <input type="submit" value="Delete" class="btn btn-danger">
           </form>
