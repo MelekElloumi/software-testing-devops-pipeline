@@ -6,7 +6,7 @@ from passlib.hash import sha256_crypt
 from functools import wraps
 
 from loginModule import verifyUser,addUser
-from productModule import productMenu
+from productModule import fetch_all
 from databaseInit import create_db
 
 
@@ -89,7 +89,33 @@ def create_app(name):
     @app.route('/productapp')
     @is_logged_in
     def productapp():
-        return render_template('productapp.html')
+        products = fetch_all()
+        if len(products) > 0:
+            return render_template('productapp.html', products=products)
+        else:
+            msg = 'No products Found'
+            return render_template('productapp.html', msg=msg)
+
+    # Delete Article
+    @app.route('/delete_product/<string:id>', methods=['POST'])
+    @is_logged_in
+    def delete_product(id):
+        return redirect(url_for('dashboard'))
+        # # Create cursor
+        # cur = mysql.connection.cursor()
+        #
+        # # Execute
+        # cur.execute("DELETE FROM articles WHERE id = %s", [id])
+        #
+        # # Commit to DB
+        # mysql.connection.commit()
+        #
+        # # Close connection
+        # cur.close()
+        #
+        # flash('Article Deleted', 'success')
+        #
+        # return redirect(url_for('dashboard'))
 
     return app
 

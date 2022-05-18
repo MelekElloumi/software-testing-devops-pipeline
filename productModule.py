@@ -12,12 +12,15 @@ def fetch_by_name(name):
     return True,product
 
 def fetch_all():
-    connection = sqlite3.connect('database.db')
-    data = connection.execute("SELECT * FROM PRODUCT;")
-    products=[]
-    for row in data:
-        product=Product(row[0],row[1],row[2],row[3])
-        products.append(product)
+    connection = sqlite3.connect('database.db', check_same_thread=False)
+    cur = connection.cursor()
+    cur.execute("SELECT * FROM PRODUCT;")
+    products = cur.fetchall()
+    print(products)
+    #products=[]
+    #for row in data:
+        #product=Product(row[0],row[1],row[2],row[3])
+        #products.append(product)
     connection.close()
     return products
 
@@ -70,7 +73,7 @@ def buy_product(id):
         connection.close()
         return True
 
-
+#Old
 def productMenu():
     choice='0'
     while choice!='8':

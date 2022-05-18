@@ -15,10 +15,10 @@
     </tr>
     {% for product in products %}
       <tr>
-        <td>{{product.id}}</td>
-        <td>{{product.name}}</td>
-        <td>{{product.price}}</td>
-        <td>{{product.quantity}}</td>
+        <td>{{product[0]}}</td>
+        <td>{{product[1]}}</td>
+        <td>{{product[2]}}</td>
+        <td>{{product[3]}}</td>
         <td><a href="edit_product/{{product.id}}" class="btn btn-default pull-right">Edit</a></td>
         <td>
           <form action="{{url_for('delete_product', id=product.id)}}" method="post">
