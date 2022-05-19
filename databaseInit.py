@@ -18,6 +18,6 @@ def create_db(database_filename):
     print("Done")
     connection.close()
 
-if __name__ == '__main__':
-    database_filename = os.environ.get('DATABASE_FILENAME', 'database.db')
-    create_db(database_filename)
+# if __name__ == '__main__':
+#     database_filename = os.environ.get('DATABASE_FILENAME', 'database.db')
+#     create_db(database_filename)

@@ -1,4 +1,4 @@
-from flask import Flask, render_template, flash, redirect, url_for, session, request
+from flask import Flask, render_template, flash, redirect, url_for, session, request, json
 from wtforms import Form, StringField, FloatField, IntegerField, PasswordField, validators
 from functools import wraps
 
@@ -39,7 +39,6 @@ def create_app(name, test=False):
             addUser(username,password)
 
             flash('Registered successfully', 'success')
-
             return redirect(url_for('login'))
         return render_template('register.html', form=form)
 
@@ -56,7 +55,6 @@ def create_app(name, test=False):
             if result:
                 session['logged_in'] = True
                 session['username'] = username
-
                 flash('Logged in successfully', 'success')
                 return redirect(url_for('productapp'))
             else:
