@@ -49,12 +49,13 @@ def test_register_post(test_client):
     # Given
     expected_status_code = 200
     expected_page_alert = b"Registered successfully"
-    # When
-    response = test_client.post('/register',data={
+    data_to_register={
                                         "username":"super",
                                         "password":"mario",
                                         "confirm":"mario"
-                                            },follow_redirects=True )
+                    }
+    # When
+    response = test_client.post('/register',data=data_to_register,follow_redirects=True )
     # Then
     assert expected_status_code == response.status_code
     assert expected_page_alert in response.data
@@ -74,11 +75,12 @@ def test_login_post_success(test_client):
     # Given
     expected_status_code = 200
     expected_page_alert = b"Logged in successfully"
-    # When
-    response = test_client.post('/login', data={
+    data_to_login={
                                         "username":"melek",
                                         "password":"elloumi"
-                                            },follow_redirects=True)
+                }
+    # When
+    response = test_client.post('/login', data=data_to_login,follow_redirects=True)
     # Then
     assert expected_status_code == response.status_code
     assert expected_page_alert in response.data
@@ -87,11 +89,12 @@ def test_login_post_failure_user(test_client):
     # Given
     expected_status_code = 200
     expected_page_alert = b"User not registered in database"
-    # When
-    response = test_client.post('/login', data={
+    data_to_login ={
                                         "username":"elloumi",
                                         "password":"melek"
-                                            })
+                                            }
+    # When
+    response = test_client.post('/login', data=data_to_login)
     print(response.data)
     # Then
     assert expected_status_code == response.status_code
@@ -101,11 +104,12 @@ def test_login_post_failure_password(test_client):
     # Given
     expected_status_code = 200
     expected_page_alert = b"Wrong password"
-    # When
-    response = test_client.post('/login', data={
+    data_to_login = {
                                         "username":"melek",
                                         "password":"melek"
-                                            })
+                    }
+    # When
+    response = test_client.post('/login', data=data_to_login)
     # Then
     assert expected_status_code == response.status_code
     assert expected_page_alert in response.data
@@ -140,11 +144,12 @@ def test_productapp_average(test_client):
     # Given
     expected_status_code = 200
     expected_page_element = b'Average: 6.375'
+    average_data=6.375
     with test_client.session_transaction() as session:
         session['logged_in'] = True
         session['username'] = "melek"
     # When
-    response = test_client.get('/productapp/6.375')
+    response = test_client.get(f'/productapp/{average_data}')
     # Then
     assert expected_status_code == response.status_code
     assert expected_page_element in response.data
@@ -197,15 +202,16 @@ def test_addproduct_post(test_client):
     expected_page_alert = b"Product Created"
     expected_product_name = b"TEST"
     expected_product_price = b"1337"
+    data_to_add={
+                                        "name":"TEST",
+                                        "price":"1337",
+                                        "quantity":"69"
+                                            }
     with test_client.session_transaction() as session:
         session['logged_in'] = True
         session['username'] = "melek"
     # When
-    response = test_client.post('/add_product',data={
-                                        "name":"TEST",
-                                        "price":"1337",
-                                        "quantity":"69"
-                                            },follow_redirects=True )
+    response = test_client.post('/add_product',data=data_to_add,follow_redirects=True )
     # Then
     assert expected_status_code == response.status_code
     assert expected_page_alert in response.data
@@ -216,11 +222,12 @@ def test_updateproduct_get(test_client):
     # Given
     expected_status_code = 200
     expected_page_title = b"<h1>Edit Product</h1>"
+    id_to_update=1
     with test_client.session_transaction() as session:
         session['logged_in'] = True
         session['username'] = "melek"
     # When
-    response = test_client.get('/edit_product/1')
+    response = test_client.get(f'/edit_product/{id_to_update}')
     # Then
     assert expected_status_code == response.status_code
     assert expected_page_title in response.data
@@ -231,15 +238,17 @@ def test_updateproduct_post(test_client):
     expected_page_alert = b"Product updated successfully"
     expected_product_name = b"RULE"
     expected_product_price = b"34"
+    id_to_update=1
+    data_to_update = {
+        "name":"RULE",
+        "price":"34",
+        "quantity":"5"
+    }
     with test_client.session_transaction() as session:
         session['logged_in'] = True
         session['username'] = "melek"
     # When
-    response = test_client.post('/edit_product/1',data={
-                                        "name":"RULE",
-                                        "price":"34",
-                                        "quantity":"5"
-                                            },follow_redirects=True )
+    response = test_client.post(f'/edit_product/{id_to_update}',data=data_to_update,follow_redirects=True )
     # Then
     assert expected_status_code == response.status_code
     assert expected_page_alert in response.data
@@ -251,11 +260,12 @@ def test_deleteproduct_post(test_client):
     expected_status_code = 200
     expected_page_alert = b"Product Deleted"
     expected_product_name = b"RULE"
+    id_to_delete = 1
     with test_client.session_transaction() as session:
         session['logged_in'] = True
         session['username'] = "melek"
     # When
-    response = test_client.post('/delete_product/1',follow_redirects=True )
+    response = test_client.post(f'/delete_product/{id_to_delete}',follow_redirects=True )
     # Then
     assert expected_status_code == response.status_code
     assert expected_page_alert in response.data
@@ -283,11 +293,12 @@ def test_buyproduct_post_success(test_client):
     # Given
     expected_status_code = 200
     expected_page_alert = b"Product bought successfully"
+    id_to_buy = 1
     with test_client.session_transaction() as session:
         session['logged_in'] = True
         session['username'] = "melek"
     # When
-    response = test_client.post('/buy_product/1',follow_redirects=True )
+    response = test_client.post(f'/buy_product/{id_to_buy}',follow_redirects=True )
     # Then
     assert expected_status_code == response.status_code
     assert expected_page_alert in response.data
@@ -296,11 +307,12 @@ def test_buyproduct_post_failure(test_client):
     # Given
     expected_status_code = 200
     expected_page_alert = b"Product Stock depleted"
+    id_to_buy = 1
     with test_client.session_transaction() as session:
         session['logged_in'] = True
         session['username'] = "melek"
     # When
-    response = test_client.post('/buy_product/1',follow_redirects=True )
+    response = test_client.post(f'/buy_product/{id_to_buy}',follow_redirects=True )
     # Then
     assert expected_status_code == response.status_code
     assert expected_page_alert in response.data
