@@ -5,7 +5,7 @@
 
 - It consists of 8 segments:
   1. UAT Scope
-     - I chose 2 test cases In Scope
+     - I chose 3 test cases In Scope
   2. UAT Assumptions and Constraints
   3. UAT Risks
      - 5 risks
@@ -14,7 +14,7 @@
   5. UAT Entry Criteria
   6. UAT Requirements-Based Test Cases
   7. UAT Test Results
-     - 4 test results: all passed
+     - 6 test results: all passed
   8. Document Signatures
 
 
