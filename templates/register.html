@@ -5,14 +5,14 @@
   {% from "includes/_formhelpers.html" import render_field %}
   <form method="POST" action="">
     <div class="form-group">
-      {{render_field(form.username, class_="form-control")}}
+      {{render_field(form.username, class_="form-control" id="username")}}
     </div>
     <div class="form-group">
-      {{render_field(form.password, class_="form-control")}}
+      {{render_field(form.password, class_="form-control" id="password")}}
     </div>
     <div class="form-group">
-      {{render_field(form.confirm, class_="form-control")}}
+      {{render_field(form.confirm, class_="form-control" id="confirm")}}
     </div>
-    <p><input type="submit" class="btn btn-primary" value="Submit"></p>
+    <p><input type="submit" class="btn btn-primary" value="Submit" id="Submit"></p>
   </form>
 {% endblock %}

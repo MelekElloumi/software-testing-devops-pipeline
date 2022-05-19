@@ -6,11 +6,11 @@
     <p class="lead">This is a small python application that I made to try on 4 types of software testing and a DevOps pipeline.</p>
     <p>Please register and login to access the CRUD products app</p>
     {% if session.logged_in == NULL %}
-      <a href="/register" class="btn btn-primary btn-lg">Register</a>
-      <a href="/login" class="btn btn-success btn-lg">Login</a>
+      <a href="/register" class="btn btn-primary btn-lg" id="Register">Register</a>
+      <a href="/login" class="btn btn-success btn-lg" id="Login">Login</a>
     {% else %}
-      <a href="/productapp" class="btn btn-primary btn-lg">ProductApp</a>
-      <a href="/logout" class="btn btn-primary btn-lg">Logout</a>
+      <a href="/productapp" class="btn btn-primary btn-lg" id="ProductApp">ProductApp</a>
+      <a href="/logout" class="btn btn-primary btn-lg" id="Logout">Logout</a>
     {% endif %}
   </div>
 {% endblock %}

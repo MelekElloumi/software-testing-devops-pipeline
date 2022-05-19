@@ -2,11 +2,11 @@
 
 {% block body %}
   <h1>ProductApp <small> Welcome {{session.username}}</small></h1>
-  <a class="btn btn-success" href="/add_product">Add Product</a>
+  <a class="btn btn-success" href="/add_product" id="addproduct">Add Product</a>
   {% if products != NULL %}
-    <a class="btn btn-success" href="/average_product">Average Product Price</a><br><br>
+    <a class="btn btn-success" href="/average_product" id="averageproduct">Average Product Price</a><br><br>
     {% if average != NULL %}
-      <p> Average: {{average}}</p>
+      <p id="average"> Average: {{average}}</p>
     {% endif %}
   {% endif %}
   <hr>
@@ -25,18 +25,18 @@
         <td>{{product[1]}}</td>
         <td>{{product[2]}}</td>
         <td>{{product[3]}}</td>
-        <td><a href="/edit_product/{{product[0]}}" class="btn btn-default pull-right">Edit</a></td>
+        <td><a href="/edit_product/{{product[0]}}" class="btn btn-default pull-right" id="editproduct{{product[0]}}">Edit</a></td>
         <td>
           <form action="{{url_for('delete_product', id=product[0])}}" method="post">
             <input type="hidden" name="_method" value="DELETE">
-            <input type="submit" value="Delete" class="btn btn-danger">
+            <input type="submit" value="Delete" class="btn btn-danger" id="deleteproduct{{product[0]}}">
           </form>
         </td>
         {% if product[3] != 0 %}
         <td>
           <form action="{{url_for('buy_product', id=product[0])}}" method="post">
             <input type="hidden" name="_method" value="BUY">
-            <input type="submit" value="Buy" class="btn btn-danger">
+            <input type="submit" value="Buy" class="btn btn-danger" id="buyproduct{{product[0]}}">
           </form>
         </td>
         {% endif %}
