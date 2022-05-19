@@ -1,7 +1,7 @@
 # Integration Testing 
 
-- I wrote 17 test cases for 10 url routes of App4Test, from the Flask app in app4test.py.
-- With the 17 unit tests, it becomes 34 tests in total.
+- I wrote 20 test cases for 10 url routes of App4Test, from the Flask app in app4test.py.
+- With the 17 unit tests, it becomes 37 tests in total.
 - I used one fixture of session scope to create a test database for all the tests.
 - I used one fixture of module scope to create the app and get its context.
 - Each test contains 3 steps: 
