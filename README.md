@@ -26,6 +26,7 @@
     1. Test
        - 2 parallel jobs: Tests on python 3.8 and 3.9
     2. Build
+       - A docker image is built and pushed to [Docker Hub](https://hub.docker.com/r/melekelloumi/app4test)
     3. Deploy
     
 
