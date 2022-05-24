@@ -179,9 +179,13 @@ def create_app(name, test=False):
     return app
 
 
-if __name__ == '__main__':
-    #create_db('database.db')
-    os.environ['DATABASE_FILENAME'] = 'database.db'
+def main( db='database.db', create=False):
+    if create:
+        create_db(db)
+    os.environ['DATABASE_FILENAME'] = db
     app = create_app(__name__)
     app.secret_key = 'secret123'
     app.run()
+
+if __name__ == '__main__':
+    main()

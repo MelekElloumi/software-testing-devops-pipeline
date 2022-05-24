@@ -1,11 +1,14 @@
-from unittest import TestCase,TestSuite,TextTestRunner
+from unittest import TestCase
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 import sqlite3
 import time
+from app4test import main
+import multiprocessing
+import os
 
 #to run the test:
-#coverage run python -m unittest "e2e Test\test_e2e_app4test.py"
+#coverage run -m unittest "e2e Test\test_e2e_app4test.py"
 
 def deleteUser():
     database_filename = 'database.db'
@@ -19,11 +22,20 @@ class TestApp4Test(TestCase):
 
     @classmethod
     def setUpClass(inst):
+        inst.app4test_process=multiprocessing.Process(target=main,name="App4Test",args=('test_database.db',True,))
+        inst.app4test_process.start()
+        time.sleep(1)
         inst.start = time.time()
-        inst.driver = webdriver.Chrome('chromedriver.exe')
+        chrome_options = webdriver.ChromeOptions()
+        chrome_options.add_argument("--headless")
+        chrome_options.add_argument("--no-sandbox")
+        chrome_options.add_argument("--start-maximized")
+        chrome_options.add_argument('--disable-gpu')
+        #inst.driver = webdriver.Chrome('chromedriver.exe')
+        inst.driver = webdriver.Chrome(options = chrome_options)
+
         #inst.driver.implicitly_wait(1)
         print("Visiting home page")
-        inst.driver.maximize_window()
         inst.driver.get('http://localhost:5000/')
         inst.driver.save_screenshot('./e2e Test/Screenshots/01_homepage.png')
 
@@ -252,6 +264,8 @@ class TestApp4Test(TestCase):
         print("\n-------\nE2E test duration: ", "{:.2f}".format(elapsedtime), "seconds")
         inst.driver.quit()
         deleteUser()
+        inst.app4test_process.terminate()
+        os.remove('test_database.db')
 
 
 
