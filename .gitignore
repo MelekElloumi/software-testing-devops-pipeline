@@ -2,5 +2,4 @@
 .pytest_cache
 htmlcov
 .coverage
-chromedriver.exe
 __pycache__

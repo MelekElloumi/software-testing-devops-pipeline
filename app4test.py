@@ -185,7 +185,7 @@ def main( db='database.db', create=False):
     os.environ['DATABASE_FILENAME'] = db
     app = create_app(__name__)
     app.secret_key = 'secret123'
-    app.run()
+    app.run(host='0.0.0.0', port=5000)
 
 if __name__ == '__main__':
     main()

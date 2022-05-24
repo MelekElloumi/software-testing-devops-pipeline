@@ -1,6 +1,2 @@
-pytest
-pytest-cov
 flask
-coverage
 WTForms
-selenium

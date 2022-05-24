@@ -1,0 +1,5 @@
+pytest
+pytest-cov
+selenium
+coverage
+-r requirements.txt

@@ -1,0 +1,13 @@
+Dockerfile
+.dockerignore
+.git*
+.coverage
+.pytest_cache
+__pycache__
+htmlcov
+UAT
+UnitTest
+Integration Test
+e2e Test
+README.md
+requirements-dev.txt
