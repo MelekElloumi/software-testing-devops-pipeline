@@ -3,11 +3,11 @@ on: [push]
 
 env:
   AWS_REGION: us-east-1
-  ECS_SERVICE: app4test-service                # set this to your Amazon ECS service name
+  ECS_SERVICE: app4test-app               # set this to your Amazon ECS service name
   ECS_CLUSTER: app4test                # set this to your Amazon ECS cluster name
   ECS_TASK_DEFINITION: .aws/task-definition.json # set this to the path to your Amazon ECS task definition
                                                # file, e.g. .aws/task-definition.json
-  CONTAINER_NAME: app4test-container
+  CONTAINER_NAME: app4test-app
 
 jobs:
   Test:
