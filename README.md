@@ -1,7 +1,7 @@
 # App 4 Software Testing & DevOps Pipeline
 - This is a small python application that I made to try on 4 types of software testing and a DevOps pipeline.
 
-## AppTest Description
+## App4Test Description
 
 - The user login then manages products (CRUD). He can buy a product or get the price average.
 - I used sqlite3 for the database. It is initialised with databaseinit.py.
