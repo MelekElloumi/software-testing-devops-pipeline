@@ -13,10 +13,10 @@
 
 ## Software Testing
 - In each folder you will find one level of testing with its Readme file:
-    1. Unit testing
-    2. Integration testing
-    3. E2E testing
-    4. UAT
+    1. [Unit testing](https://github.com/MelekElloumi/Software-Testing-DevOps-Pipeline/tree/main/UnitTest)
+    2. [Integration testing](https://github.com/MelekElloumi/Software-Testing-DevOps-Pipeline/tree/main/Integration%20Test)
+    3. [E2E testing](https://github.com/MelekElloumi/Software-Testing-DevOps-Pipeline/tree/main/e2e%20Test)
+    4. [UAT](https://github.com/MelekElloumi/Software-Testing-DevOps-Pipeline/tree/main/UAT)
 
 ## DevOps Pipeline
 ![example workflow](https://github.com/MelekElloumi/Software-Testing-DevOps-Pipeline/actions/workflows/DevOps_Pipeline.yml/badge.svg)
